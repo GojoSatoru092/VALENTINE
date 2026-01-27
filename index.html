@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Untuk Penguin-ku 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background:linear-gradient(180deg,#ff758c,#ff7eb3);
+  min-height:100vh;overflow:hidden;color:#fff;text-align:center
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(transparent 40%,rgba(0,0,0,.25))
+}
+section{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px;opacity:0;pointer-events:none;
+  transition:opacity .9s ease
+}
+section.active{opacity:1;pointer-events:all}
+
+h1{font-size:2.3rem;margin-bottom:14px}
+p{font-size:1.05rem;max-width:360px;line-height:1.6;opacity:.95}
+
+.btn{
+  margin-top:22px;padding:12px 28px;border:none;border-radius:30px;
+  background:#fff;color:#ff4d6d;font-size:1rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+.btn-group{display:flex;gap:14px;margin-top:26px}
+.back{background:#ffd6e0}
+
+.photo-circle{
+  width:220px;height:220px;object-fit:cover;border-radius:50%;
+  box-shadow:0 14px 40px rgba(0,0,0,.35)
+}
+.photo-portrait{
+  width:260px;height:340px;object-fit:cover;border-radius:20px;
+  box-shadow:0 18px 50px rgba(0,0,0,.4)
+}
+.caption{font-size:.9rem;opacity:.85;margin-top:10px}
+
+.music{position:fixed;top:14px;right:14px;z-index:10;text-align:right}
+.music button{
+  border:none;border-radius:999px;padding:10px 14px;
+  background:rgba(255,255,255,.9);color:#ff4d6d
+}
+.music-hint{
+  margin-top:6px;background:#fff;color:#ff4d6d;
+  padding:6px 10px;border-radius:12px;font-size:.75rem;
+  animation:pulse 1.5s infinite
+}
+@keyframes pulse{
+  0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}
+}
+.heart{position:fixed;bottom:-20px;font-size:20px;animation:floatUp linear infinite}
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" src="music.mp3" loop></audio>
+
+<div class="music">
+  <button id="musicBtn">🔊 Musik Hidup</button>
+  <div id="musicHint" class="music-hint">Ketuk untuk menghidupkan/mematikan musik 🎵</div>
+</div>
+
+<section class="active">
+  <h1>Hai Penguin 🐧💖</h1>
+  <p>Aku membuat sesuatu khusus untukmu. Mari kita nikmati perlahan.</p>
+  <button class="btn" onclick="next()">Ketuk 💌</button>
+</section>
+
+<section>
+  <img class="photo-circle" src="intan-1.jpg">
+  <div class="caption">Senyummu favoritku.</div>
+  <h1>Dear Intan 🥰</h1>
+  <p>Kamu mengubah hari biasa menjadi kenangan indah.</p>
+  <div class="btn-group">
+    <button class="btn back" onclick="prev()">⬅ Kembali</button>
+    <button class="btn" onclick="next()">Berikutnya ✨</button>
+  </div>
+</section>
+
+<section>
+  <img class="photo-portrait" src="intan-2.jpg">
+  <div class="caption">Rumah, dalam satu gambar.</div>
+  <h1>Manusia Favoritku ❤️</h1>
+  <p>Hatiku selalu memilihmu lagi dan lagi.</p>
+  <div class="btn-group">
+    <button class="btn back" onclick="prev()">⬅ Kembali</button>
+    <button class="btn" onclick="next()">Berikutnya 😌</button>
+  </div>
+</section>
+
+<section>
+  <h1>Apakah Kamu Menjadi Valentine-ku?💘</h1>
+  <p>Meski jarak memisahkan…</p>
+  <div class="btn-group">
+    <button class="btn" onclick="yes()">Ya 💖</button>
+    <button class="btn back" onmouseover="runAway(this)">Tidak 🥺</button>
+  </div>
+</section>
+
+<section>
+  <h1>Valentine-ku 💌</h1>
+  <p>
+    Meski kita jauh,<br>
+    hatiku terasa semakin dekat setiap hari.<br><br>
+    Jarak tak pernah menghentikan cinta,<br>
+    justru membuktikan betapa kuatnya kita.
+  </p>
+  <div class="btn-group">
+    <button class="btn back" onclick="prev()">⬅ Kembali</button>
+    <button class="btn" onclick="next()">Berikutnya 💕</button>
+  </div>
+</section>
+
+<section>
+  <img class="photo-circle" src="intan-3.jpg">
+  <div class="caption">Tidak ada jarak di antara hati.</div>
+  <h1>Jarak Jauh, Satu Cinta 🌍❤️</h1>
+  <p>
+    Berbeda tempat, tapi tetap sama perasaan.<br>
+    Suatu hari, jarak ini hanya akan jadi cerita yang kita ceritakan.
+  </p>
+  <div class="btn-group">
+    <button class="btn back" onclick="prev()">⬅ Kembali</button>
+    <button class="btn" onclick="next()">Terakhir 💖</button>
+  </div>
+</section>
+
+<section>
+  <h1>Aku Cinta Kamu ❤️</h1>
+  <p>
+    Selamat Hari Valentine, Penguin-ku 🐧💖<br><br>
+    Tak peduli jarak memisahkan,<br>
+    kamu selalu ada di hatiku.
+  </p>
+</section>
+
+<script>
+const sections = document.querySelectorAll('section');
+let i = 0;
+
+const bgm = document.getElementById('bgm');
+const btn = document.getElementById('musicBtn');
+const hint = document.getElementById('musicHint');
+
+// --- Musik Auto-play saat Halaman Dimuat ---
+window.addEventListener('load', () => {
+  bgm.volume = 0.5;
+  bgm.play().then(() => {
+    // Auto-play berhasil
+    btn.innerText = "🔊 Musik Hidup";
+    hint.style.display = "none";
+  }).catch(() => {
+    // Auto-play diblokir, tampilkan petunjuk
+    btn.innerText = "🔇 Musik Mati";
+    hint.style.display = "block";
+  });
+});
+
+// Tombol Toggle Musik
+btn.onclick = () => {
+  if (bgm.paused) {
+    bgm.play().then(() => btn.innerText = "🔊 Musik Hidup");
+  } else {
+    bgm.pause();
+    btn.innerText = "🔇 Musik Mati";
+  }
+  hint.style.display = "none";
+};
+
+// Hentikan musik jika tab tidak aktif
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    bgm.pause();
+    btn.innerText = "🔇 Musik Mati";
+  }
+});
+
+// --- Navigasi Section ---
+function next() { sections[i].classList.remove('active'); i++; sections[i].classList.add('active'); }
+function prev() { sections[i].classList.remove('active'); i--; sections[i].classList.add('active'); }
+
+// --- Animasi Hati Valentine ---
+function yes() { next(); for (let j = 0; j < 30; j++) heart(); }
+function runAway(b) { b.style.transform = `translate(${Math.random() * 200 - 100}px,${Math.random() * 200 - 100}px)`; }
+
+function heart() {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerText = '❤️';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.animationDuration = (4 + Math.random() * 3) + 's';
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 7000);
+}
+setInterval(heart, 450);
+</script>
+
+</body>
+</html>
