@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Penguin 🐧</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }body {
+  background: linear-gradient(180deg, #ffdde1, #ee9ca7);
+  overflow: hidden;
+  color: #fff;
+}
+
+.screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 1.1rem;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.tap {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+img {
+  max-width: 220px;
+  border-radius: 18px;
+  margin: 20px 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  animation: zoom 10s ease-in-out infinite;
+}
+
+@keyframes zoom {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+button {
+  padding: 14px 26px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff4b7d;
+  color: #fff;
+}
+
+.no {
+  background: #ffffffaa;
+  color: #ff4b7d;
+  position: relative;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 18px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+  </style>
+</head>
+<body><audio id="music" src="music.mp3" loop></audio>
+
+<div id="musicWrapper" style="position:fixed;top:16px;right:16px;z-index:999;text-align:right;">
+  <button id="musicToggle" style="padding:8px 14px;border-radius:20px;border:none;background:#ffffffaa;color:#ff4b7d;font-size:0.85rem;">🔊 Music On</button>
+  <div id="musicHint" style="margin-top:6px;background:#ffffffee;color:#ff4b7d;padding:6px 10px;border-radius:12px;font-size:0.75rem;animation:pulse 2s infinite;">Tap to turn music on/off 🎵</div>
+</div><div class="screen active" id="s1" onclick="next()">
+  <h1>Hey Penguin 🐧</h1>
+  <p>I made something just for you.</p>
+  <div class="tap">Tap anywhere</div>
+</div><div class="screen" id="s2" onclick="next()">
+  <h1>Dear Intan</h1>
+  <img src="intan-1.jpg" alt="Intan" />
+  <p>You make everything feel warmer just by being here.</p>
+</div><div class="screen" id="s3" onclick="next()">
+  <h1>My Favorite Human</h1>
+  <img src="intan-2.jpg" alt="Penguin" />
+  <p>If I had to choose again, I would still choose you.</p>
+</div><div class="screen" id="s4">
+  <h1>Will you be my Valentine?</h1>
+  <div class="buttons">
+    <button class="yes" onclick="yes()">Yes 💖</button>
+    <button class="no" onmouseover="moveNo(this)">No 🥺</button>
+  </div>
+</div><div class="screen" id="s5">
+  <h1>You said yes 🥹❤️</h1>
+  <p>Thank you for choosing me. Today and always.</p>
+</div><script>
+  const music = document.getElementById('music');
+  const toggleBtn = document.getElementById('musicToggle');
+
+  // Try autoplay on load
+  window.addEventListener('load', () => {
+    music.volume = 0.6;
+    music.play().catch(() => {});
+  });
+
+  // Toggle music on/off
+  toggleBtn.addEventListener('click', () => {
+    const hint = document.getElementById('musicHint');
+    if (music.paused) {
+      music.play();
+      toggleBtn.innerText = '🔊 Music On';
+    } else {
+      music.pause();
+      toggleBtn.innerText = '🔇 Music Off';
+    }
+    if (hint) hint.style.display = 'none';
+  });('click', () => {
+    if (music.paused) {
+      music.play();
+      toggleBtn.innerText = '🔊 Music On';
+    } else {
+      music.pause();
+      toggleBtn.innerText = '🔇 Music Off';
+    }
+  });
+
+  // Pause music when app goes to background
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      music.pause();
+      toggleBtn.innerText = '🔇 Music Off';
+    }
+  });
+
+  const screens = document.querySelectorAll('.screen');
+  let index = 0;
+
+  function next() {
+    if (index < screens.length - 2) {
+      screens[index].classList.remove('active');
+      index++;
+      screens[index].classList.add('active');
+    }
+  }
+  }
+
+  function yes() {
+    screens[index].classList.remove('active');
+    screens[4].classList.add('active');
+    for (let i = 0; i < 20; i++) createHeart();
+  }
+
+  function moveNo(btn) {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+
+  setInterval(createHeart, 500);
+</script></body>
+</html>
